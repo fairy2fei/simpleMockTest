@@ -1,15 +1,16 @@
-var request = require("request");
-let data;
-var query = 'Harry Potter';
-var url = 'https://www.omdbapi.com/?s=' + query + '&apikey=1ef32cde';
-request(url, function(error, response, body){
-    if(!error && response.statusCode == 200){
-         data = JSON.parse(body)['Search'][0]['imdbID'];
-    }
-}); 
-function movieAPIHandler(req, res) {
-        res.send(data);
+const query = 'Harry Potter';
+const url = 'https://www.omdbapi.com/?s=' + query + '&apikey=1ef32cde';
+const rp = require('request-promise-native');
+
+async function apiCall() {
+  try {
+    const body =  await rp(url)
+    console.log(body)
+    const result = JSON.parse(body)['Search'][0]['imdbID'];
+    return result;
+  } catch (err) {
+    throw Error(err);
+  }
 }
-  
-module.exports = movieAPIHandler;
-  
+
+module.exports = apiCall;
