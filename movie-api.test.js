@@ -18,5 +18,4 @@ describe("Example", () => {
     app = require('./movie-api');
     await expect(app()).resolves.toBe('customId')
   });
-
 });

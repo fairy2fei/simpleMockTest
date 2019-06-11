@@ -5,7 +5,6 @@ const rp = require('request-promise-native');
 async function apiCall() {
   try {
     const body =  await rp(url)
-    console.log(body)
     const result = JSON.parse(body)['Search'][0]['imdbID'];
     return result;
   } catch (err) {
